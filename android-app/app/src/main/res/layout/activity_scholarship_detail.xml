@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColorLight"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txtDetTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PG Scholarship for Single Girl Child"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtDetCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UGC Scheme"
+            android:textColor="@color/white"
+            android:background="@color/accentColor"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/txtDetTitle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Card Description -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintTop_toBottomOf="@id/txtDetCategory">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scheme Description"
+                    android:textColor="@color/textColorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtDetDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Designed to assist meritorious candidates with education support, compensating direct tuition and maintenance expenses."
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card Eligibility -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardElig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintTop_toBottomOf="@id/cardDesc">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Eligibility Criteria"
+                    android:textColor="@color/textColorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtDetElig"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Minimum aggregate academic performance criteria.\n• Indian citizenship verified.\n• Annual household income limits apply."
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card Documents -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDocsRequired"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintTop_toBottomOf="@id/cardElig">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Required Documents"
+                    android:textColor="@color/textColorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Aadhaar Card / Identity proof\n• Academic mark sheets and certificates\n• Income certificate issued by competent authority\n• Bank passbook copy for DBT transfer"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Apply Button -->
+        <Button
+            android:id="@+id/btnDetApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply for Scheme"
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@id/cardDocsRequired" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

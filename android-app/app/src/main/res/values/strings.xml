@@ -1,0 +1,148 @@
+<resources>
+    <string name="app_name">Gov Scholarship Portal</string>
+    <string name="portal_header">National Scholarship Portal</string>
+    <string name="portal_subheader">Unified Digital Welfare Gateway</string>
+    
+    <!-- Onboarding strings -->
+    <string name="ob_title_1">Explore Schemes</string>
+    <string name="ob_desc_1">Search all central sector, state, and UGC schemes in one portal.</string>
+    <string name="ob_title_2">Verify Instantly</string>
+    <string name="ob_desc_2">Track live verification with Nodal officers and state boards.</string>
+    <string name="ob_title_3">DBT Disbursements</string>
+    <string name="ob_desc_3">Get scholarship benefits credited directly to your Aadhaar-linked account.</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_skip">Skip</string>
+    <string name="btn_get_started">Get Started</string>
+
+    <!-- Navigation strings -->
+    <string name="nav_home">Home</string>
+    <string name="nav_scholarships">Scholarships</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Required Documents -->
+    <string name="title_required_documents">Required Documents</string>
+    <string name="desc_upload_documents">Upload clear scanned copies of your documents</string>
+    <string name="info_allowed_files">Allowed: PDF, JPG, JPEG, PNG • Maximum size: 2 MB</string>
+    <string name="label_aadhaar_card">Aadhaar Card</string>
+    <string name="desc_aadhaar_card">Identity verification document</string>
+    <string name="label_no_file_selected">No file selected</string>
+    <string name="btn_choose_aadhaar">Choose Aadhaar File</string>
+    <string name="btn_upload_aadhaar">Upload Aadhaar</string>
+    <string name="label_income_certificate">Income Certificate</string>
+    <string name="desc_income_certificate">Current financial year income proof</string>
+    <string name="btn_choose_income">Choose Income Certificate</string>
+    <string name="btn_upload_income">Upload Income Certificate</string>
+    <string name="label_bonafide_certificate">Bonafide Certificate</string>
+    <string name="desc_bonafide_certificate">Official certificate from your college</string>
+    <string name="btn_choose_bonafide">Choose Bonafide File</string>
+    <string name="btn_upload_bonafide">Upload Bonafide Certificate</string>
+    <string name="label_caste_certificate">Caste Certificate</string>
+    <string name="desc_caste_certificate">Required for SC, ST or OBC scholarship claims</string>
+    <string name="btn_choose_caste">Choose Caste Certificate</string>
+    <string name="btn_upload_caste">Upload Caste Certificate</string>
+    <string name="label_domicile_certificate">Domicile Certificate</string>
+    <string name="desc_domicile_certificate">Proof of permanent state residency</string>
+    <string name="btn_choose_domicile">Choose Domicile Certificate</string>
+    <string name="btn_upload_domicile">Upload Domicile Certificate</string>
+    <string name="label_bank_passbook">Bank Passbook Copy</string>
+    <string name="desc_bank_passbook">Account number, name and IFSC details</string>
+    <string name="btn_choose_bank">Choose Bank Passbook</string>
+    <string name="btn_upload_bank">Upload Bank Passbook</string>
+    <string name="label_marksheet">Previous Year Marksheet</string>
+    <string name="desc_marksheet">Official marksheet of previous academic year</string>
+    <string name="btn_choose_marksheet">Choose Marksheet</string>
+    <string name="btn_upload_marksheet">Upload Marksheet</string>
+    <string name="msg_uploaded_success">Uploaded successfully</string>
+
+    <!-- Login Strings -->
+    <string name="title_login">Student Access</string>
+    <string name="desc_login">Authenticate your portal account credentials</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login Securely</string>
+    <string name="link_register">New applicant? Register profile here</string>
+
+    <!-- Register Strings -->
+    <string name="title_register">New Student Profile</string>
+    <string name="desc_register">Register to access state &amp; central sector schemes</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="hint_phone">Mobile Number</string>
+    <string name="hint_course">Course Enrolled</string>
+    <string name="hint_category">Reservation Category</string>
+    <string name="hint_address">Permanent Address</string>
+    <string name="hint_create_password">Create Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="btn_register">Register Profile</string>
+    <string name="link_login">Already registered? Login here</string>
+
+    <!-- Help Strings -->
+    <string name="title_help">Help &amp; Support</string>
+    <string name="desc_help">Submit an inquiries query to the help desk team</string>
+    <string name="hint_query">Explain your query topic</string>
+    <string name="btn_submit_help">Submit Support Request</string>
+
+    <!-- Eligibility Strings -->
+    <string name="title_eligibility">Eligibility Checker</string>
+    <string name="desc_eligibility">Calculate matching opportunities locally</string>
+    <string name="hint_income">Annual Family Income ($)</string>
+    <string name="hint_marks">Previous Class Marks (%)</string>
+    <string name="hint_category_selection">Reservation Category (SC/ST/OBC/General)</string>
+    <string name="btn_run_assessment">Run Assessment</string>
+    <string name="header_matches">Matches Found!</string>
+    <string name="body_match_example">You match: PG Scholarship for Single Girl Child.</string>
+
+    <!-- Contact Strings -->
+    <string name="title_contact">Contact Administration</string>
+    <string name="desc_contact">National Scholarship Portal help desk credentials</string>
+    <string name="label_office_address">Office Location Address</string>
+    <string name="office_address">Ministry of Education, Shastri Bhawan, New Delhi - 110001</string>
+    <string name="label_helpline">Support Helpline</string>
+    <string name="helpline_number">Toll-Free Helpline: 1800-111-222</string>
+
+    <!-- Home Strings -->
+    <string name="ministry_label">Ministry of Electronics &amp; IT, Govt of India</string>
+    <string name="hint_search_scholarships">Search scholarships...</string>
+    <string name="label_categories">Scholarship Categories</string>
+    <string name="cat_pre_matric">Pre-Matric</string>
+    <string name="cat_post_matric">Post-Matric</string>
+    <string name="cat_professional">Professional</string>
+    <string name="label_quick_actions">Quick Actions Menu</string>
+    <string name="action_eligibility">Eligibility Checker</string>
+    <string name="action_required_docs">Required Docs</string>
+    <string name="action_help">Help &amp; Support</string>
+    <string name="action_contact">Contact Us</string>
+    <string name="label_featured_schemes">Featured Schemes</string>
+    <string name="label_latest_announcements">Latest Announcements</string>
+
+    <!-- Scholarships Strings -->
+    <string name="title_scholarships">Scholarship Catalog</string>
+    <string name="desc_scholarships">Select a scheme to view eligibility and apply</string>
+
+    <!-- Feedback & Messages -->
+    <string name="msg_authenticating">Authenticating...</string>
+    <string name="msg_login_success">Welcome, %s!</string>
+    <string name="msg_submitting_ticket">Submitting Ticket...</string>
+    <string name="msg_ticket_submitted">Support ticket submitted! Ticket ID: %s</string>
+    <string name="msg_submitting_app">Submitting Application...</string>
+    <string name="msg_app_submitted">Application Submitted! Reference: %s (Status: Pending)</string>
+    <string name="btn_apply">Apply for Scheme</string>
+    <string name="msg_login_required">Please log in to apply for this scholarship scheme.</string>
+    <string name="msg_fill_all">Please fill in all details</string>
+    <string name="label_benefit">Benefit: %s</string>
+    <string name="label_deadline">Deadline: %s</string>
+    <string name="label_sector">%s Sector</string>
+    <!-- Notifications Strings -->
+    <string name="title_notifications">Portal Notifications</string>
+    <string name="desc_notifications">Directives regarding deadlines and DBT payments</string>
+
+    <!-- Profile Strings -->
+    <string name="label_profile_initials">SP</string>
+    <string name="label_aadhaar_seeded">Aadhaar Seeded</string>
+    <string name="title_profile_details">Student Profile Details</string>
+    <string name="label_course">Course</string>
+    <string name="label_category">Category</string>
+    <string name="label_bank_name">Bank Name</string>
+    <string name="label_account_number">Account Number</string>
+    <string name="btn_sign_out">Sign Out</string>
+</resources>

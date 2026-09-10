@@ -1,0 +1,116 @@
+@{
+    Layout = null;
+    var errorMessage = ViewBag.ErrorMessage as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Admin Login - Government Scholarship Portal</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Bootstrap 5 CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/Content/site.css" />
+</head>
+<body class="login-bg">
+
+    <!-- Loading Spinner Overlay -->
+    <div id="loader-overlay">
+        <div class="text-center">
+            <div class="gov-spinner mb-3"></div>
+            <div class="text-dark fw-bold">Verifying Administration Protocol...</div>
+            <div class="text-muted small">Government Scholarship Secure Gate</div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <!-- Secure Header -->
+        <div class="login-header">
+            <i class="fa-solid fa-building-columns fs-1 text-warning mb-2"></i>
+            <h3>GOVERNMENT OF INDIA</h3>
+            <span style="font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.75);">Scholarship Administration System</span>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="login-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success border-0 small mb-4 py-2" role="alert" style="border-radius: 6px;">
+                    <i class="fas fa-check-circle me-1"></i> @TempData["SuccessMessage"]
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger border-0 small mb-4 py-2" role="alert" style="border-radius: 6px;">
+                    <i class="fas fa-exclamation-triangle me-1"></i> @errorMessage
+                </div>
+            }
+
+            @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { id = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                
+                <div class="mb-3">
+                    <label for="username" class="form-label small fw-bold text-muted">Administrative ID</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 border-slate-200" style="border-radius: 8px 0 0 8px;"><i class="fa-regular fa-user text-muted"></i></span>
+                        <input type="text" id="username" name="username" class="form-control form-control-custom border-start-0 ps-1" placeholder="e.g. admin" required style="border-radius: 0 8px 8px 0;" />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between">
+                        <label for="password" class="form-label small fw-bold text-muted">Secure Access Password</label>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 border-slate-200" style="border-radius: 8px 0 0 8px;"><i class="fa-solid fa-lock text-muted"></i></span>
+                        <input type="password" id="password" name="password" class="form-control form-control-custom border-start-0 ps-1" placeholder="Enter secure key" required style="border-radius: 0 8px 8px 0;" />
+                    </div>
+                </div>
+
+                <div class="mb-3 d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label small text-muted" for="rememberMe">
+                            Remember Terminal
+                        </label>
+                    </div>
+                    <a href="javascript:void(0);" onclick="alert('Demo Mode: Default credentials are [admin / admin123]');" class="small text-decoration-none text-primary fw-semibold">Forgot Key?</a>
+                </div>
+
+                <button type="submit" class="btn btn-custom btn-custom-primary w-100 py-2 mt-2">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>Authenticate Terminal
+                </button>
+            }
+        </div>
+        
+        <!-- Secure Disclaimer -->
+        <div class="login-footer">
+            <div class="small fw-semibold text-dark"><i class="fa-solid fa-shield text-warning me-1"></i> Authorized Personnel Only</div>
+            <div class="small mt-1 text-muted" style="font-size: 0.7rem; line-height: 1.3;">
+                Any unauthorized access or monitoring of this portal will be prosecuted under IT Act Section 66. IP address and terminal logs are tracked.
+            </div>
+        </div>
+    </div>
+
+    <!-- Script imports -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function() {
+                $('#loader-overlay').addClass('show');
+            });
+        });
+    </script>
+</body>
+</html>

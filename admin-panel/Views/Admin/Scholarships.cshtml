@@ -1,0 +1,290 @@
+@model List<GovernmentScholarshipPortal.Models.ScholarshipViewModel>
+@{
+    ViewBag.Title = "Manage Scholarships";
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="m-0 text-primary">Manage Portal Scholarships</h2>
+        <p class="text-muted m-0">Create, review, edit, or terminate government scholarship schemes.</p>
+    </div>
+    <div>
+        <button class="btn btn-custom btn-custom-primary" data-bs-toggle="modal" data-bs-target="#addScholarshipModal">
+            <i class="fa-solid fa-plus me-2"></i>Add New Scheme
+        </button>
+    </div>
+</div>
+
+<!-- Schemes Table Card -->
+<div class="card border-0 shadow-sm rounded-3">
+    <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+        <h5 class="m-0 text-primary"><i class="fa-solid fa-graduation-cap me-2"></i>Active & Draft Schemes</h5>
+        <div class="d-flex gap-2">
+            <input type="text" id="schemeSearch" class="form-control form-control-sm form-control-custom" placeholder="Search by name..." style="width: 250px;" />
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive-custom border-0 shadow-none m-0">
+            <table class="table table-custom align-middle" id="schemesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Scholarship Name</th>
+                        <th>Category</th>
+                        <th>Grant Amount</th>
+                        <th>Last Date to Apply</th>
+                        <th>Status</th>
+                        <th class="text-center" style="width: 150px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td class="fw-bold text-dark text-wrap" style="max-width: 300px;">@item.Name</td>
+                                <td><span class="badge bg-light text-dark px-3 py-1">@item.Category</span></td>
+                                <td class="fw-bold text-primary">₹ @item.Amount.ToString("N0")</td>
+                                <td>
+                                    <i class="fa-regular fa-calendar-days text-muted me-1"></i>
+                                    @item.LastDate.ToString("dd MMM yyyy")
+                                </td>
+                                <td>
+                                    @if (item.Status == "Active")
+                                    {
+                                        <span class="badge-status bg-approved"><i class="fas fa-circle-check"></i> Active</span>
+                                    }
+                                    else if (item.Status == "Expired")
+                                    {
+                                        <span class="badge-status bg-rejected"><i class="fas fa-circle-xmark"></i> Expired</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-status bg-draft"><i class="fas fa-clock"></i> Draft</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <!-- Edit trigger -->
+                                        <button class="btn btn-sm btn-outline-primary edit-scholarship-btn" 
+                                                data-id="@item.Id" 
+                                                data-name="@item.Name" 
+                                                data-category="@item.Category" 
+                                                data-amount="@item.Amount.ToString("F0")" 
+                                                data-lastdate="@item.LastDate.ToString("yyyy-MM-dd")" 
+                                                data-status="@item.Status"
+                                                title="Edit Scheme Details">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <!-- Delete trigger -->
+                                        <button class="btn btn-sm btn-outline-danger delete-scholarship-btn" 
+                                                data-id="@item.Id" 
+                                                data-name="@item.Name"
+                                                title="Remove Scheme">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">No scholarship schemes found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ADD SCHOLARSHIP MODAL -->
+<div class="modal fade" id="addScholarshipModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title" id="addModalLabel"><i class="fa-solid fa-plus me-2"></i>Create Scholarship Scheme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @using (Html.BeginForm("AddScholarship", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body modal-body-custom">
+                    <div class="mb-3">
+                        <label for="Name" class="form-label small fw-bold">Scholarship Name</label>
+                        <input type="text" name="Name" class="form-control form-control-custom" placeholder="e.g. Post Graduate Scheme for Single Girl Child" required />
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="Category" class="form-label small fw-bold">Applicable Category</label>
+                            <select name="Category" class="form-select form-control-custom" required>
+                                <option value="General">General</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="Minority">Minority</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Amount" class="form-label small fw-bold">Grant Amount (₹)</label>
+                            <input type="number" name="Amount" class="form-control form-control-custom" min="1" max="1000000" placeholder="e.g. 20000" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="LastDate" class="form-label small fw-bold">Last Date to Apply</label>
+                            <input type="date" name="LastDate" class="form-control form-control-custom" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Status" class="form-label small fw-bold">Status</label>
+                            <select name="Status" class="form-select form-control-custom" required>
+                                <option value="Active">Active</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Expired">Expired</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-custom-success px-4">Publish Scheme</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- EDIT SCHOLARSHIP MODAL -->
+<div class="modal fade" id="editScholarshipModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header modal-header-custom" style="background-color: var(--primary-light);">
+                <h5 class="modal-title" id="editModalLabel"><i class="fa-solid fa-pen-to-square me-2"></i>Modify Scheme Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @using (Html.BeginForm("EditScholarship", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="edit-id" name="Id" />
+                <div class="modal-body modal-body-custom">
+                    <div class="mb-3">
+                        <label for="edit-name" class="form-label small fw-bold">Scholarship Name</label>
+                        <input type="text" id="edit-name" name="Name" class="form-control form-control-custom" required />
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="edit-category" class="form-label small fw-bold">Applicable Category</label>
+                            <select id="edit-category" name="Category" class="form-select form-control-custom" required>
+                                <option value="General">General</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="Minority">Minority</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit-amount" class="form-label small fw-bold">Grant Amount (₹)</label>
+                            <input type="number" id="edit-amount" name="Amount" class="form-control form-control-custom" min="1" max="1000000" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="edit-lastdate" class="form-label small fw-bold">Last Date to Apply</label>
+                            <input type="date" id="edit-lastdate" name="LastDate" class="form-control form-control-custom" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit-status" class="form-label small fw-bold">Status</label>
+                            <select id="edit-status" name="Status" class="form-select form-control-custom" required>
+                                <option value="Active">Active</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Expired">Expired</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-custom-primary px-4">Update Changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- DELETE SCHOLARSHIP MODAL -->
+<div class="modal fade" id="deleteScholarshipModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header bg-danger text-white border-none py-3">
+                <h6 class="modal-title" id="deleteModalLabel"><i class="fa-solid fa-triangle-exclamation me-2"></i>Delete Scheme</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1) grayscale(1) brightness(2);"></button>
+            </div>
+            @using (Html.BeginForm("DeleteScholarship", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="delete-id" name="id" />
+                <div class="modal-body p-4 text-center">
+                    <p class="text-muted small mb-3">Are you sure you want to permanently remove this scheme? This action is irreversible.</p>
+                    <p id="delete-name-span" class="fw-bold text-danger small"></p>
+                </div>
+                <div class="modal-footer bg-light border-0 justify-content-center">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-danger px-4">Terminate</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Live Search Scheme by Name
+            $("#schemeSearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#schemesTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Bind Edit values
+            $('.edit-scholarship-btn').on('click', function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var category = $(this).data('category');
+                var amount = $(this).data('amount');
+                var lastdate = $(this).data('lastdate');
+                var status = $(this).data('status');
+
+                var modal = $('#editScholarshipModal');
+                modal.find('#edit-id').val(id);
+                modal.find('#edit-name').val(name);
+                modal.find('#edit-category').val(category);
+                modal.find('#edit-amount').val(amount);
+                modal.find('#edit-lastdate').val(lastdate);
+                modal.find('#edit-status').val(status);
+
+                var editModal = new bootstrap.Modal(document.getElementById('editScholarshipModal'));
+                editModal.show();
+            });
+
+            // Bind Delete values
+            $('.delete-scholarship-btn').on('click', function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                
+                var modal = $('#deleteScholarshipModal');
+                modal.find('#delete-id').val(id);
+                modal.find('#delete-name-span').text(name);
+                
+                var deleteModal = new bootstrap.Modal(document.getElementById('deleteScholarshipModal'));
+                deleteModal.show();
+            });
+        });
+    </script>
+}

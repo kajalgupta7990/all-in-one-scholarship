@@ -1,0 +1,216 @@
+@model List<GovernmentScholarshipPortal.Models.ApplicationViewModel>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!-- Dashboard Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="m-0 text-primary">Portal Performance Dashboard</h2>
+        <p class="text-muted m-0">National Scholarship Portal real-time monitoring and approval metrics.</p>
+    </div>
+    <div class="text-end">
+        <span class="badge bg-secondary py-2 px-3 fw-semibold"><i class="fa-solid fa-clock me-1"></i> System Time: @DateTime.Now.ToString("dd MMM yyyy, hh:mm tt")</span>
+   <a href="http://localhost/2412061/project/student-portal/index.php"
+   class="btn btn-primary mt-2">
+    <i class="fas fa-graduation-cap me-1"></i> Student Portal
+</a>
+    </div>
+    
+</div>
+
+<!-- Counters Grid -->
+<div class="row g-4 mb-4">
+    <!-- Total Students Counter -->
+    <div class="col-xl-2 col-md-4 col-sm-6">
+        <div class="card stat-card sc-primary">
+            <div class="card-body">
+                <div class="stat-card-icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <div class="stat-card-val">@ViewBag.TotalStudents</div>
+                <div class="stat-card-lbl">Total Students</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Total active Scholarships Counter -->
+    <div class="col-xl-2 col-md-4 col-sm-6">
+        <div class="card stat-card sc-info">
+            <div class="card-body">
+                <div class="stat-card-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="stat-card-val">@ViewBag.TotalScholarships</div>
+                <div class="stat-card-lbl">Scholarships</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Applications Counter -->
+    <div class="col-xl-2 col-md-4 col-sm-6">
+        <div class="card stat-card sc-warning">
+            <div class="card-body">
+                <div class="stat-card-icon">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+                <div class="stat-card-val text-warning">@ViewBag.PendingApplications</div>
+                <div class="stat-card-lbl">Pending Apps</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Approved Applications Counter -->
+    <div class="col-xl-3 col-md-6 col-sm-6">
+        <div class="card stat-card sc-success">
+            <div class="card-body">
+                <div class="stat-card-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="stat-card-val text-success">@ViewBag.ApprovedApplications</div>
+                <div class="stat-card-lbl">Approved Apps</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rejected Applications Counter -->
+    <div class="col-xl-3 col-md-6 col-sm-6">
+        <div class="card stat-card sc-danger">
+            <div class="card-body">
+                <div class="stat-card-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="stat-card-val text-danger">@ViewBag.RejectedApplications</div>
+                <div class="stat-card-lbl">Rejected Apps</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Section: Table and System status -->
+<div class="row g-4 mb-4">
+    <!-- Recent Applications Table -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                <h5 class="m-0 text-primary"><i class="fa-solid fa-list me-2"></i>Recent Scholarship Requests</h5>
+                <a href="@Url.Action("Applications", "Admin")" class="btn btn-sm btn-outline-primary rounded-pill px-3">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive-custom border-0 shadow-none m-0">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th>Ref ID</th>
+                                <th>Student</th>
+                                <th>Category</th>
+                                <th>Scholarship</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var app in Model)
+                                {
+                                    <tr>
+                                        <td class="fw-semibold">#@app.Id</td>
+                                        <td>
+                                            <div class="fw-bold">@app.StudentName</div>
+                                            <small class="text-muted">Applied: @app.AppliedDate.ToString("dd MMM yyyy")</small>
+                                        </td>
+                                        <td><span class="badge bg-light text-dark">@app.Category</span></td>
+                                        <td class="text-wrap" style="max-width: 200px;">@app.ScholarshipName</td>
+                                        <td class="fw-bold text-primary">₹ @app.Amount.ToString("N0")</td>
+                                        <td>
+                                            @if (app.Status == "Approved")
+                                            {
+                                                <span class="badge-status bg-approved"><i class="fas fa-check-circle"></i> Approved</span>
+                                            }
+                                            else if (app.Status == "Pending")
+                                            {
+                                                <span class="badge-status bg-pending"><i class="fas fa-clock"></i> Pending</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge-status bg-rejected"><i class="fas fa-times-circle"></i> Rejected</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">No recent applications found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats and System Status -->
+    <div class="col-lg-4">
+        <!-- System Status Card -->
+        <div class="card border-0 shadow-sm rounded-3 mb-4">
+            <div class="card-header bg-white border-0 py-3">
+                <h5 class="m-0 text-primary"><i class="fa-solid fa-server me-2"></i>Secure System Core</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                        <span class="text-muted">Core Portal Server</span>
+                        <span class="badge bg-success"><i class="fas fa-circle-check me-1"></i> ONLINE / SECURE</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                        <span class="text-muted">Database Engine Connection</span>
+                        <span class="badge bg-success"><i class="fas fa-link me-1"></i> SIMULATED (DEMO)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                        <span class="text-muted">Maintenance Mode</span>
+                        @if (ViewBag.MaintenanceMode)
+                        {
+                            <span class="badge bg-danger"><i class="fas fa-triangle-exclamation me-1"></i> ACTIVE</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">INACTIVE (LIVE)</span>
+                        }
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                        <span class="text-muted">Server Location</span>
+                        <span class="fw-semibold text-dark">NIC Central Region, Delhi</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quick Statistics Panel -->
+        <div class="card border-0 shadow-sm rounded-3 bg-gradient" style="background: linear-gradient(135deg, #0f3d59 0%, #164f73 100%); color: white;">
+            <div class="card-body p-4">
+                <h5 class="card-title text-warning mb-3"><i class="fa-solid fa-chart-simple me-2"></i>Quick Disbursal Stats</h5>
+                <div class="mb-3 border-bottom border-white border-opacity-10 pb-2">
+                    <div class="small text-white-50">Total Budget Available</div>
+                    <div class="fs-3 fw-bold">₹ 50,00,000</div>
+                </div>
+                <div class="row g-2 mb-2">
+                    <div class="col-6">
+                        <div class="text-white-50 small">Avg. Disbursal Amount</div>
+                        <div class="fw-semibold fs-6">₹ 18,333</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-white-50 small">Target Group Coverage</div>
+                        <div class="fw-semibold fs-6">OBC, SC, ST, Minorities</div>
+                    </div>
+                </div>
+                <div class="mt-4 bg-white bg-opacity-10 p-3 rounded-3 small">
+                    <i class="fa-solid fa-circle-info text-warning me-1"></i> Active validation of applications is currently configured to a minimum GPA benchmark threshold of 6.0.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

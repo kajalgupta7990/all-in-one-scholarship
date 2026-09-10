@@ -1,0 +1,161 @@
+@{
+    ViewBag.Title = "Settings";
+    var adminName = ViewBag.AdminFullName as string;
+    var adminEmail = ViewBag.AdminEmail as string;
+    var adminPhone = ViewBag.AdminPhone as string;
+    var portalTitle = ViewBag.PortalTitle as string;
+    var contactEmail = ViewBag.PrimaryContactEmail as string;
+    var maintMode = (bool)ViewBag.MaintenanceMode;
+    var gpaThreshold = (int)ViewBag.MinimumGpaThreshold;
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="m-0 text-primary">System & Account Settings</h2>
+        <p class="text-muted m-0">Configure global metadata rules, adjust admin contact profiles, and manage system security keys.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-3">
+        <!-- Settings Tabs Navigation -->
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="list-group list-group-flush" id="settings-tabs" role="tablist" style="font-size: 0.95rem;">
+                <button class="list-group-item list-group-item-action active py-3 px-4 border-0 d-flex align-items-center gap-3" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tab-profile" type="button" role="tab" aria-controls="tab-profile" aria-selected="true">
+                    <i class="fa-regular fa-user-circle fs-5 text-primary"></i>
+                    <span>Admin Profile</span>
+                </button>
+                <button class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center gap-3" id="portal-tab" data-bs-toggle="tab" data-bs-target="#tab-portal" type="button" role="tab" aria-controls="tab-portal" aria-selected="false">
+                    <i class="fa-solid fa-sliders fs-5 text-primary"></i>
+                    <span>Portal Configuration</span>
+                </button>
+                <button class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center gap-3" id="security-tab" data-bs-toggle="tab" data-bs-target="#tab-security" type="button" role="tab" aria-controls="tab-security" aria-selected="false">
+                    <i class="fa-solid fa-key-skeleton fs-5 text-primary"></i>
+                    <span>Security Settings</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body p-4">
+                <div class="tab-content" id="settings-tabs-content">
+                    
+                    <!-- 1. ADMIN PROFILE TAB -->
+                    <div class="tab-pane fade show active" id="tab-profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h5 class="text-primary mb-3"><i class="fa-regular fa-id-card me-2"></i>Admin Profile Information</h5>
+                        <p class="text-muted small mb-4">Update the primary contact profile of the Admin Account. This profile name is shown in logs.</p>
+                        
+                        @using (Html.BeginForm("SaveProfile", "Admin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Full Name</label>
+                                    <input type="text" name="fullName" class="form-control form-control-custom" value="@adminName" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Designation Role</label>
+                                    <input type="text" class="form-control form-control-custom bg-light" value="Officer In-Charge" readonly />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Secure Email Address</label>
+                                    <input type="email" name="email" class="form-control form-control-custom" value="@adminEmail" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Contact Hotline Phone</label>
+                                    <input type="text" name="phone" class="form-control form-control-custom" value="@adminPhone" required />
+                                </div>
+                                <div class="col-12 mt-4 border-top pt-3 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-custom btn-custom-primary">
+                                        <i class="fa-solid fa-floppy-disk me-2"></i>Save Profile Changes
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- 2. PORTAL CONFIGURATION TAB -->
+                    <div class="tab-pane fade" id="tab-portal" role="tabpanel" aria-labelledby="portal-tab">
+                        <h5 class="text-primary mb-3"><i class="fa-solid fa-gears me-2"></i>Global Portal Parameters</h5>
+                        <p class="text-muted small mb-4">Configure runtime properties, minimum validation guidelines, and helpdesk endpoints.</p>
+
+                        @using (Html.BeginForm("SavePortalSettings", "Admin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label small fw-bold">Portal Title / Header Branding</label>
+                                    <input type="text" name="portalTitle" class="form-control form-control-custom" value="@portalTitle" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Helpdesk Support Email Address</label>
+                                    <input type="email" name="contactEmail" class="form-control form-control-custom" value="@contactEmail" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">GPA Qualification Threshold</label>
+                                    <input type="number" name="gpaThreshold" class="form-control form-control-custom" value="@gpaThreshold" min="1" max="10" step="1" required />
+                                    <small class="text-muted" style="font-size: 0.75rem;">Minimum CGPA/GPA verification filter benchmark for incoming applications.</small>
+                                </div>
+                                
+                                <div class="col-12 mt-3 bg-light p-3 rounded-3">
+                                    <div class="form-check form-switch d-flex justify-content-between align-items-center p-0">
+                                        <div>
+                                            <label class="form-check-label fw-bold text-danger m-0" for="maintenanceMode"><i class="fa-solid fa-triangle-exclamation me-1"></i>Portal Maintenance Lockout</label>
+                                            <div class="text-muted small" style="font-size: 0.75rem;">If enabled, student access to dashboard registration is blocked. Admins can still sign-in.</div>
+                                        </div>
+                                        <input class="form-check-input ms-0" type="checkbox" role="switch" id="maintenanceMode" name="maintenanceMode" value="true" @(maintMode ? "checked" : "") style="width: 50px; height: 24px; cursor: pointer;">
+                                        <!-- Need a hidden field for MVC boolean check binding helper -->
+                                        <input type="hidden" name="maintenanceMode" value="false" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4 border-top pt-3 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-custom btn-custom-primary">
+                                        <i class="fa-solid fa-floppy-disk me-2"></i>Save Configuration
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- 3. SECURITY SETTINGS TAB -->
+                    <div class="tab-pane fade" id="tab-security" role="tabpanel" aria-labelledby="security-tab">
+                        <h5 class="text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Administrative Password Update</h5>
+                        <p class="text-muted small mb-4">Reset the admin terminal security password. Passwords should be stored securely.</p>
+
+                        @using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="row g-3" style="max-width: 500px;">
+                                <div class="col-12">
+                                    <label class="form-label small fw-bold">Current Access Password</label>
+                                    <input type="password" name="currentPassword" class="form-control form-control-custom" placeholder="Type current key" required />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-bold">New Security Password</label>
+                                    <input type="password" name="newPassword" class="form-control form-control-custom" placeholder="Min 6 characters" required />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-bold">Confirm New Password</label>
+                                    <input type="password" name="confirmPassword" class="form-control form-control-custom" placeholder="Re-type new password" required />
+                                </div>
+                                <div class="col-12 mt-4 pt-2">
+                                    <button type="submit" class="btn btn-custom btn-custom-primary">
+                                        <i class="fa-solid fa-key me-2"></i>Update Password
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+@model List<GovernmentScholarshipPortal.Models.AnnouncementViewModel>
+@{
+    ViewBag.Title = "Notifications & Announcements";
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="m-0 text-primary">Portal Announcements</h2>
+        <p class="text-muted m-0">Publish official guidelines, extend deadlines, and notify targeted student groups.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Publish Announcement Form Column -->
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm rounded-3 h-100">
+            <div class="card-header bg-white border-0 py-3">
+                <h5 class="m-0 text-primary"><i class="fa-solid fa-pen-nib me-2"></i>Publish New Notice</h5>
+            </div>
+            <div class="card-body p-4">
+                @using (Html.BeginForm("PublishAnnouncement", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="mb-3">
+                        <label for="Title" class="form-label small fw-bold">Notice Headline</label>
+                        <input type="text" name="Title" class="form-control form-control-custom" placeholder="e.g. Income Certificate Guideline Change" required />
+                        <span class="text-muted small" style="font-size: 0.75rem;">Limit to 100 characters. Keep it clear.</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="TargetAudience" class="form-label small fw-bold">Target Student Quota</label>
+                        <select name="TargetAudience" class="form-select form-control-custom" required>
+                            <option value="All Students">All Students (General Notice)</option>
+                            <option value="SC/ST Students">SC/ST Students Only</option>
+                            <option value="OBC Students">OBC Students Only</option>
+                            <option value="Minority Students">Minority Students Only</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="Content" class="form-label small fw-bold">Message Content</label>
+                        <textarea name="Content" rows="6" class="form-control form-control-custom" placeholder="Provide full details of the policy, updates, links, or instructions..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-custom btn-custom-primary w-100 py-2">
+                        <i class="fa-solid fa-bullhorn me-2"></i>Publish Announcement
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Announcement List Column -->
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-3 h-100">
+            <div class="card-header bg-white border-0 py-3">
+                <h5 class="m-0 text-primary"><i class="fa-solid fa-list-check me-2"></i>Active Announcements Queue</h5>
+            </div>
+            <div class="card-body p-4" style="max-height: 520px; overflow-y: auto;">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="card bg-light border-0 mb-3 rounded-3 shadow-none p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 mb-2">
+                                        <i class="fa-solid fa-users me-1" style="font-size: 0.75rem;"></i>@item.TargetAudience
+                                    </span>
+                                    <h6 class="fw-bold text-dark m-0">@item.Title</h6>
+                                    <small class="text-muted" style="font-size: 0.75rem;"><i class="fa-regular fa-clock me-1"></i>Published: @item.PublishedDate.ToString("dd MMM yyyy, hh:mm tt")</small>
+                                </div>
+                                <div class="text-end">
+                                    @if (item.IsActive)
+                                    {
+                                        <span id="announcement-badge-@item.Id" class="badge-status bg-approved mb-2 d-inline-block">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span id="announcement-badge-@item.Id" class="badge-status bg-rejected mb-2 d-inline-block">Inactive</span>
+                                    }
+                                </div>
+                            </div>
+                            <p class="text-muted small text-wrap mb-3" style="line-height: 1.4;">
+                                @item.Content
+                            </p>
+                            <div class="border-top pt-2 d-flex justify-content-end">
+                                @if (item.IsActive)
+                                {
+                                    <button class="btn btn-sm btn-outline-warning toggle-announcement-status py-1 px-3" data-id="@item.Id" style="font-size: 0.8rem;">
+                                        Deactivate
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-sm btn-outline-success toggle-announcement-status py-1 px-3" data-id="@item.Id" style="font-size: 0.8rem;">
+                                        Activate
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center text-muted py-5">
+                        <i class="fa-regular fa-folder-open fs-2 mb-2"></i>
+                        <div>No announcements published yet.</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

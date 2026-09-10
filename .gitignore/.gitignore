@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Android
+.gradle/
+.idea/
+*/build/
+local.properties
+
+# Android generated files
+*.iml
+
+# PHP
+vendor/
+
+# OS
+Thumbs.db
+.DS_Store

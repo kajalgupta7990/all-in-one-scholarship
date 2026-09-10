@@ -1,0 +1,171 @@
+@model List<GovernmentScholarshipPortal.Models.ApplicationViewModel>
+@{
+    ViewBag.Title = "Manage Applications";
+}
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="m-0 text-primary">Manage Scholarship Applications</h2>
+        <p class="text-muted m-0">Validate, verify, and approve/reject submitted student applications for active scholarship schemes.</p>
+    </div>
+</div>
+
+<!-- Filters Bar Card -->
+<div class="card border-0 shadow-sm rounded-3 mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <label for="appSearch" class="form-label small fw-bold text-muted mb-1">Search Keywords</label>
+                <input type="text" id="appSearch" class="form-control form-control-custom" placeholder="Search by student or scholarship..." />
+            </div>
+            <div class="col-md-3">
+                <label for="statusFilter" class="form-label small fw-bold text-muted mb-1">Status Category</label>
+                <select id="statusFilter" class="form-select form-control-custom">
+                    <option value="">All Applications</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="categoryFilter" class="form-label small fw-bold text-muted mb-1">Quota Category</label>
+                <select id="categoryFilter" class="form-select form-control-custom">
+                    <option value="">All Quotas</option>
+                    <option value="General">General</option>
+                    <option value="OBC">OBC</option>
+                    <option value="SC">SC</option>
+                    <option value="ST">ST</option>
+                    <option value="Minority">Minority</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-grid mt-4">
+                <button type="button" id="resetFilters" class="btn btn-outline-secondary btn-custom py-2">
+                    <i class="fa-solid fa-arrows-rotate me-1"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Applications Grid Card -->
+<div class="card border-0 shadow-sm rounded-3">
+    <div class="card-body p-0">
+        <div class="table-responsive-custom border-0 shadow-none m-0">
+            <table class="table table-custom align-middle" id="applicationsTable">
+                <thead>
+                    <tr>
+                        <th>App ID</th>
+                        <th>Student Details</th>
+                        <th>Quota</th>
+                        <th>Scholarship Scheme</th>
+                        <th>Disbursal Amt</th>
+                        <th>Status Stamp</th>
+                        <th class="text-center" style="width: 220px;">Decision Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr id="application-row-@item.Id">
+                                <td class="fw-semibold">#@item.Id</td>
+                                <td>
+                                    <div class="fw-bold text-dark">@item.StudentName</div>
+                                    <small class="text-muted">Applied On: @item.AppliedDate.ToString("dd MMM yyyy")</small>
+                                </td>
+                                <td><span class="badge bg-light text-dark text-uppercase filter-category">@item.Category</span></td>
+                                <td class="text-wrap text-dark" style="max-width: 250px;">@item.ScholarshipName</td>
+                                <td class="fw-bold text-primary">₹ @item.Amount.ToString("N0")</td>
+                                <td class="status-cell">
+                                    @if (item.Status == "Approved")
+                                    {
+                                        <span class="badge-status bg-approved"><i class="fas fa-check-circle"></i> Approved</span>
+                                    }
+                                    else if (item.Status == "Pending")
+                                    {
+                                        <span class="badge-status bg-pending"><i class="fas fa-clock"></i> Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-status bg-rejected"><i class="fas fa-times-circle"></i> Rejected</span>
+                                    }
+                                </td>
+                                <td class="action-cell text-center">
+                                    @if (item.Status == "Pending")
+                                    {
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <button class="btn btn-sm btn-custom-success approve-application-btn" data-id="@item.Id" title="Approve Scholarship">
+                                                <i class="fa-solid fa-check me-1"></i> Approve
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger reject-application-btn btn-custom" data-id="@item.Id" title="Reject Scholarship">
+                                                <i class="fa-solid fa-xmark me-1"></i> Reject
+                                            </button>
+                                        </div>
+                                    }
+                                    else if (item.Status == "Approved")
+                                    {
+                                        <span class="text-success fw-bold"><i class="fas fa-check"></i> Processed</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger fw-bold"><i class="fas fa-times"></i> Rejected</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">No scholarship applications found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Live Search & Multiple Filter logic
+            function filterTable() {
+                var searchVal = $("#appSearch").val().toLowerCase();
+                var statusVal = $("#statusFilter").val().toLowerCase();
+                var categoryVal = $("#categoryFilter").val().toLowerCase();
+
+                $("#applicationsTable tbody tr").each(function () {
+                    var row = $(this);
+                    
+                    // Extracts cell texts
+                    var studentAndSchemeText = row.find("td:nth-child(2)").text().toLowerCase() + " " + row.find("td:nth-child(4)").text().toLowerCase();
+                    var categoryText = row.find(".filter-category").text().toLowerCase();
+                    var statusText = row.find(".status-cell").text().toLowerCase();
+
+                    // Filter match check
+                    var matchesSearch = studentAndSchemeText.indexOf(searchVal) > -1;
+                    var matchesStatus = statusVal === "" || statusText.indexOf(statusVal) > -1;
+                    var matchesCategory = categoryVal === "" || categoryText === categoryVal;
+
+                    if (matchesSearch && matchesStatus && matchesCategory) {
+                        row.show();
+                    } else {
+                        row.hide();
+                    }
+                });
+            }
+
+            $("#appSearch, #statusFilter, #categoryFilter").on("change keyup", filterTable);
+
+            $("#resetFilters").on("click", function () {
+                $("#appSearch").val("");
+                $("#statusFilter").val("");
+                $("#categoryFilter").val("");
+                filterTable();
+            });
+        });
+    </script>
+}

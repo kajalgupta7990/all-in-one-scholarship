@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_bg_info_box.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\bg_info_box.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_ic_home.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\ic_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_ic_notification.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\ic_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_item_scholarship.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\item_scholarship.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_scholarship_detail.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_scholarship_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_help_support.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_help_support.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_bg_gradient.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\bg_gradient.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_eligibility_checker.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_eligibility_checker.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_fragment_scholarships.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\fragment_scholarships.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_onboarding.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_onboarding.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_ic_scholarship.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\ic_scholarship.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_contact.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_contact.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_required_documents.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_required_documents.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_fragment_notifications.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\fragment_notifications.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_item_announcement.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\item_announcement.xml"
+    },
+    {
+        "merged": "com.gov.scholarship.app-debug-32:/layout_fragment_home.xml.flat",
+        "source": "com.gov.scholarship.app-main-34:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-debug-32:\\layout_activity_splash.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\9.3.0\\com.gov.scholarship.app-main-34:\\layout\\activity_splash.xml"
+    }
+]
